@@ -117,7 +117,7 @@ window.nova_plugins.push({
                   //    '.ytp-player-content'
                   // ].some(s => evt.srcElement.matches(s))
                ) {
-                  restorePlayFn();
+                  restorePlayFn(true);
                }
             }, { capture: true });
 
@@ -127,10 +127,10 @@ window.nova_plugins.push({
                this.paused || this.pause(); // alt just in case
             };
 
-            function restorePlayFn() {
+            function restorePlayFn(isClick = false) {
                restorePlayFn = function () { } // no-op function
                HTMLVideoElement.prototype.play = backupFn;
-               movie_player.playVideo(); // dirty fix
+               if (!isClick) movie_player.playVideo(); // dirty fix
                // video.play();
             }
          });
